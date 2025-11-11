@@ -44,9 +44,10 @@ a{color:inherit;text-decoration:none}
   background:
     radial-gradient(1200px 600px at 10% 10%, rgba(178,43,43,0.18) 0%, transparent 60%),
     radial-gradient(900px 600px at 80% 20%, rgba(43,58,40,0.18) 0%, transparent 60%);
+  /* CORREÇÃO: Ativa o efeito parallax (fundo fixo) */
+  background-attachment: fixed; 
   border-bottom:1px solid var(--border);
 }
-
 
 .hero-inner{position:relative;z-index:1}
 .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:56px 0}
@@ -199,4 +200,31 @@ a{color:inherit;text-decoration:none}
 
 .header.shrunk .brand h1 {
   font-size: 1.2rem; /* Opcional: Diminui o tamanho do título */
+}
+/* Responsividade para telas menores que 1024px */
+@media (max-width: 1024px) {
+  /* 1. Responsividade do Layout Hero (empilhar card e imagem) */
+  .hero-inner {
+    flex-direction: column; /* Empilha os itens verticalmente */
+    padding: 32px 0; /* Diminui o padding vertical */
+    gap: 32px; /* Aumenta a distância entre os elementos */
+  }
+
+  /* 2. Responsividade dos elementos do Hero para ocupar toda largura */
+  .hero-card, .hero-art {
+    max-width: 100%; /* Ocupa toda largura disponível no container */
+  }
+  
+  /* 3. Ajuste de altura e largura da arte do Hero (Carrossel) */
+  .hero-art {
+    max-width: 100%; /* Garante que o container ocupe toda largura */
+    height: 400px; /* Diminui a altura fixa do carrossel para mobile */
+  }
+  
+  /* 4. Footer (alinhamento em telas pequenas) */
+  .footer-inner {
+    flex-direction: column; /* Empilha os textos do footer */
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
