@@ -91,3 +91,57 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
   });
 });
+// --- Efeito de diminuir o Header ao rolar (Scroll Shrink) ---
+function handleScrollShrink() {
+  const header = document.querySelector('.header');
+  const scrollThreshold = 50; // Quantidade de pixels para rolar antes de diminuir
+
+  if (window.scrollY > scrollThreshold) {
+    header.classList.add('shrunk');
+  } else {
+    header.classList.remove('shrunk');
+  }
+}
+
+// Inicializa a verificação e adiciona o listener de scroll
+window.addEventListener('scroll', handleScrollShrink);
+handleScrollShrink(); // Executa uma vez ao carregar (em caso de recarga no meio da página)
+// --- Efeito de Carrossel de Imagens no Hero ---
+function startHeroCarousel() {
+    const heroImage = document.getElementById('heroImage');
+    if (!heroImage) return;
+
+    // Lista de imagens que serão TROCADAS.
+    // A primeira imagem é a que já está no HTML (hero-display.webp).
+    const carouselImages = [
+        "imagens/artesanal1.jpg",
+        "imagens/artesanal2.jpg",
+        "imagens/artesanal3.jpg",
+        "imagens/artesanal4.jpg",
+        "imagens/hero-display.webp" // Inclui a imagem inicial para fechar o ciclo
+    ];
+    let currentIndex = 0;
+
+    function cycleImages() {
+        // Calcula o índice da próxima imagem a ser exibida
+        currentIndex = (currentIndex + 1) % carouselImages.length;
+        
+        // 1. Inicia o fade-out
+        heroImage.style.opacity = '0'; 
+
+        setTimeout(() => {
+            // 2. Troca a imagem (depois de 0.5s)
+            heroImage.src = carouselImages[currentIndex];
+            
+            // 3. Inicia o fade-in
+            heroImage.style.opacity = '1'; 
+        }, 1000); // O valor 1000ms deve ser igual à transição de opacidade definida no CSS
+    }
+    
+    // Inicia o ciclo, trocando a cada 2 segundos (2000ms)
+    // A primeira troca acontece 2s após o carregamento da página.
+    setInterval(cycleImages, 3000);
+}
+
+// Garante que o carrossel comece a rodar assim que a página carregar
+document.addEventListener('DOMContentLoaded', startHeroCarousel);

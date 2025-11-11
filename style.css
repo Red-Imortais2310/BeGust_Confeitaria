@@ -26,11 +26,14 @@ a{color:inherit;text-decoration:none}
   backdrop-filter: blur(10px);
   background: linear-gradient(180deg, var(--glass-1), var(--glass-2));
   border-bottom:1px solid var(--border);
+  transform: translateZ(0); 
+  /* Otimização final para a renderização suave */
+  will-change: transform; 
 }
-.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0;transition: padding 300ms ease;will-change: padding}
 .brand{display:flex;align-items:center;gap:14px}
 .brand img{width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.45));transition:width 200ms ease,height 200ms ease}
-.brand h1{font-family:"Cinzel",serif;font-weight:700;letter-spacing:0.8px;font-size:1.5rem;margin:0}
+.brand h1{font-family:"Cinzel",serif;font-weight:700;letter-spacing:0.8px;font-size:1.5rem;margin:0;transition:font-size 300ms ease}
 .menu{list-style:none;margin:0;padding:0;display:flex;gap:18px}
 .menu a{font-family:"EB Garamond",serif;font-weight:600;padding:8px 12px;border-radius:8px}
 .menu a:hover{background:rgba(255,255,255,0.08);border:1px solid var(--border)}
@@ -43,6 +46,9 @@ a{color:inherit;text-decoration:none}
     radial-gradient(900px 600px at 80% 20%, rgba(43,58,40,0.18) 0%, transparent 60%);
   border-bottom:1px solid var(--border);
 }
+
+
+.hero-inner{position:relative;z-index:1}
 .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:56px 0}
 .hero-card{
   backdrop-filter: blur(14px);
@@ -52,11 +58,24 @@ a{color:inherit;text-decoration:none}
 .hero-card h2{font-family:"Cinzel",serif;font-size:2rem;margin:0 0 10px}
 .hero-card p{font-family:"EB Garamond",serif;color:var(--muted);margin:0 0 18px}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;font-weight:700;border:1px solid var(--border);background:rgba(255,255,255,0.06)}
-.btn.primary{background:var(--accent);border-color:rgba(255,255,255,0.2)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:rgba(255,255,255,0.2);color:#fff}
+.hero-card .btn{box-shadow:0 6px 18px rgba(0,0,0,0.25)}
 .btn:hover{filter:brightness(1.08)}
-.hero-art{max-width:420px;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
-
+.hero-art{
+  max-width:380px; /* Reduz a largura um pouco */
+  height:480px; /* Define a altura menor solicitada */
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+/* Estilo para a imagem preencher o novo container e para a transição suave */
+.hero-art img {
+  height:100%; 
+  object-fit:cover; /* Garante que a imagem preencha sem esticar */
+  transition: opacity 1000ms ease-in-out; /* Adiciona o efeito de fade-in/out */
+}
 /* Parallax base */
 .parallax{
   position:relative;min-height:90vh;
@@ -166,6 +185,18 @@ a{color:inherit;text-decoration:none}
   .brand img{width:64px;height:64px}
   .hero-logo{width:110px}
 }
-
 /* Logo dentro do hero (destaque) */
 .hero-logo{width:140px;display:block;margin:0 0 12px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45));object-fit:contain}
+/* Efeito de diminuição da Header ao rolar */
+.header.shrunk .nav {
+  padding: 8px 0; /* Diminui o padding vertical da navegação */
+}
+
+.header.shrunk .brand img {
+  width: 56px; /* Diminui a largura da logo */
+  height: 56px; /* Diminui a altura da logo */
+}
+
+.header.shrunk .brand h1 {
+  font-size: 1.2rem; /* Opcional: Diminui o tamanho do título */
+}
