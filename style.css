@@ -1,0 +1,171 @@
+:root{
+  --bg: #0f0f12;
+  --ink: #e8e6e3;
+  --muted: #bfb9ae;
+  --accent: #b22b2b;     /* vermelho veludo */
+  --accent-2: #2b3a28;   /* verde musgo londino */
+  --glass-1: rgba(255,255,255,0.08);
+  --glass-2: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.18);
+  --shadow: 0 8px 24px rgba(0,0,0,0.45);
+  --maxw: 1200px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);scroll-behavior:smooth}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.flex{display:flex;gap:24px;align-items:center}
+.grid{display:grid;gap:24px}
+
+/* Header/Nav com vidro */
+.header{
+  position:sticky;top:0;z-index:1000;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, var(--glass-1), var(--glass-2));
+  border-bottom:1px solid var(--border);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.45));transition:width 200ms ease,height 200ms ease}
+.brand h1{font-family:"Cinzel",serif;font-weight:700;letter-spacing:0.8px;font-size:1.5rem;margin:0}
+.menu{list-style:none;margin:0;padding:0;display:flex;gap:18px}
+.menu a{font-family:"EB Garamond",serif;font-weight:600;padding:8px 12px;border-radius:8px}
+.menu a:hover{background:rgba(255,255,255,0.08);border:1px solid var(--border)}
+
+/* Hero */
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(178,43,43,0.18) 0%, transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, rgba(43,58,40,0.18) 0%, transparent 60%);
+  border-bottom:1px solid var(--border);
+}
+.hero-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:56px 0}
+.hero-card{
+  backdrop-filter: blur(14px);
+  background: linear-gradient(180deg, var(--glass-1), var(--glass-2));
+  border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:var(--shadow);max-width:700px
+}
+.hero-card h2{font-family:"Cinzel",serif;font-size:2rem;margin:0 0 10px}
+.hero-card p{font-family:"EB Garamond",serif;color:var(--muted);margin:0 0 18px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;font-weight:700;border:1px solid var(--border);background:rgba(255,255,255,0.06)}
+.btn.primary{background:var(--accent);border-color:rgba(255,255,255,0.2)}
+.btn:hover{filter:brightness(1.08)}
+.hero-art{max-width:420px;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+
+/* Parallax base */
+.parallax{
+  position:relative;min-height:90vh;
+  background-position:center;background-size:cover;
+  background-attachment:fixed;
+}
+.parallax-overlay{
+  backdrop-filter: blur(2px);
+  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+  width:100%;height:100%;display:flex;align-items:center
+}
+.parallax-content{padding:60px 0;width:100%}
+
+/* Parallax imagens */
+.parallax-redvelvet{
+  background-image:url("imagens/card-redvelvet.jpg");
+}
+.parallax-florestanegra{
+  background-image:url("imagens/card-floresta.avif");
+}
+.parallax-frutas{
+  background-image:url("imagens/card-frutas.webp");
+}
+
+/* Bloco de bolo com resumo ao lado (flex) */
+.cake{align-items:flex-start}
+.cake-image{flex:1;min-width:280px}
+.cake-image img{border-radius:16px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.cake-title{margin-top:10px;font-family:"Cinzel",serif}
+.cake-summary{
+  flex:1;min-width:280px;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, var(--glass-1), var(--glass-2));
+  border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow)
+}
+.cake-summary p{font-family:"EB Garamond",serif;color:var(--ink);margin:0 0 16px}
+
+/* Quem somos */
+.section{padding:60px 0;border-top:1px solid var(--border)}
+.section h2{font-family:"Cinzel",serif;margin:0 0 20px}
+.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:24px}
+.about-text p{color:var(--muted);line-height:1.6}
+.about-photos{display:block}
+.about-photos img{border-radius:12px;border:1px solid var(--border);max-width:320px}
+
+/* Galeria de bolos (15 imagens) */
+.gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px}
+.gallery-item{background:linear-gradient(180deg, var(--glass-1), var(--glass-2));border:1px solid var(--border);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.gallery-item img{width:100%;height:140px;object-fit:cover;border-radius:8px;cursor:pointer;transition:transform 200ms ease}
+.gallery-item img:hover{transform:scale(1.03)}
+.gallery-title{font-family:"Cinzel",serif;font-size:0.95rem;margin:0;color:var(--ink)}
+
+/* Lightbox / modal */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
+.lightbox.open{display:flex}
+.lightbox-content{max-width:90%;max-height:90%;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lightbox-content img{max-width:100%;max-height:80vh;border-radius:10px;box-shadow:var(--shadow);transform:scale(1);transition:transform 250ms ease}
+.lightbox-close{background:rgba(255,255,255,0.06);border:1px solid var(--border);padding:8px 10px;border-radius:8px;color:var(--ink);cursor:pointer}
+.lightbox-caption{color:var(--muted)}
+
+/* Cardápio */
+.menu-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.menu-item{display:flex;flex-direction:column;gap:14px;border:1px solid var(--border);border-radius:16px;padding:16px;background:linear-gradient(180deg, var(--glass-1), var(--glass-2));backdrop-filter:blur(8px);box-shadow:var(--shadow)}
+.menu-info h3{margin:0 0 6px;font-family:"Cinzel",serif}
+.menu-info p{margin:0 0 8px;color:var(--muted)}
+.price{display:block;margin-bottom:10px;font-weight:700}
+
+/* Contato */
+.contact{align-items:flex-start}
+.contact-info{flex:1}
+.contact-form{flex:1;display:grid;gap:12px}
+.contact-form input, .contact-form textarea{
+  width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.06);color:var(--ink)
+}
+.contact-form button{justify-self:start}
+
+/* Footer com vidro */
+.footer{
+  margin-top:40px;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, var(--glass-1), var(--glass-2));
+  border-top:1px solid var(--border)
+}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+
+/* Botão flutuante WhatsApp */
+.whats{  
+  position:fixed;right:16px;bottom:16px;z-index:1200;
+  background:transparent;color:inherit;padding:4px;border-radius:0;
+  display:inline-flex;align-items:center;justify-content:center;box-shadow:none;font-weight:700;border:none;width:auto;height:auto
+}
+.whats img{width:28px;height:28px;display:block}
+
+/* Responsividade */
+@media (max-width:1024px){
+  .about-grid{grid-template-columns:1fr}
+  .menu-grid{grid-template-columns:1fr 1fr}
+  .hero-inner{flex-direction:column}
+}
+@media (max-width:640px){
+  .menu{gap:10px}
+  .menu-grid{grid-template-columns:1fr}
+  .flex{flex-direction:column}
+  .footer-inner{flex-direction:column;gap:8px}
+  .hero-card{max-width:100%}
+  .brand img{width:64px;height:64px}
+  .hero-logo{width:110px}
+}
+
+/* Logo dentro do hero (destaque) */
+.hero-logo{width:140px;display:block;margin:0 0 12px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45));object-fit:contain}
