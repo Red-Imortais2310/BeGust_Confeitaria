@@ -145,3 +145,38 @@ function startHeroCarousel() {
 
 // Garante que o carrossel comece a rodar assim que a página carregar
 document.addEventListener('DOMContentLoaded', startHeroCarousel);
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+});
+// ===== HEADER DINÂMICO =====
+window.addEventListener('scroll', function() {
+  const header = document.querySelector('.header');
+  if (window.scrollY > 80) {
+    header.classList.add('shrink');
+  } else {
+    header.classList.remove('shrink');
+  }
+});
+
+// ===== FORMULÁRIO ENVIA PARA WHATSAPP =====
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const nome = encodeURIComponent(document.querySelector('[name="nome"]').value);
+    const email = encodeURIComponent(document.querySelector('[name="email"]').value);
+    const mensagem = encodeURIComponent(document.querySelector('[name="mensagem"]').value);
+
+    const texto = `Olá BeGust, meu nome é ${nome}%0A` +
+                  `E-mail: ${email}%0A` +
+                  `Mensagem: ${mensagem}`;
+
+    const numero = '5513996911182';
+    const url = `https://wa.me/${numero}?text=${texto}`;
+
+    window.open(url, '_blank');
+  });
+}

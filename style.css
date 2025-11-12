@@ -2,7 +2,7 @@
   --bg: #0f0f12;
   --ink: #e8e6e3;
   --muted: #bfb9ae;
-  --accent: #b22b2b;     /* vermelho veludo */
+  --accent: #3bdf51;     /* verde veludo */
   --accent-2: #2b3a28;   /* verde musgo londino */
   --glass-1: rgba(255,255,255,0.08);
   --glass-2: rgba(255,255,255,0.06);
@@ -19,6 +19,9 @@ a{color:inherit;text-decoration:none}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 .flex{display:flex;gap:24px;align-items:center}
 .grid{display:grid;gap:24px}
+
+.h5{font-family:"EB Garamond",serif;color:var(--muted);margin:0 0 18px
+}
 
 /* Header/Nav com vidro */
 .header{
@@ -39,14 +42,40 @@ a{color:inherit;text-decoration:none}
 .menu a:hover{background:rgba(255,255,255,0.08);border:1px solid var(--border)}
 
 /* Hero */
-.hero{
-  position:relative;overflow:hidden;
-  background:
-    radial-gradient(1200px 600px at 10% 10%, rgba(178,43,43,0.18) 0%, transparent 60%),
-    radial-gradient(900px 600px at 80% 20%, rgba(43,58,40,0.18) 0%, transparent 60%);
-  /* CORREÇÃO: Ativa o efeito parallax (fundo fixo) */
-  background-attachment: fixed; 
-  border-bottom:1px solid var(--border);
+/* Hero - Container principal */
+.hero {
+    position: relative; 
+    overflow: hidden;
+    background: none; 
+    border-bottom: 1px solid var(--border);
+}
+
+/* Camada de Background Desfocada (Pseudo-Elemento) */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Caminho da imagem: style.css na raiz, imagens/bg1.webp */
+    background-image: url('imagens/bg1.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+    /* Aplica o filtro de desfoque APENAS nesta camada */
+    filter: blur(8px); 
+    transform: scale(1.05); /* Para evitar bordas transparentes do desfoque */
+    z-index: 1; 
+}
+
+/* Conteúdo do Hero (Para ficar nítido e acima) */
+.hero-inner {
+    position: relative; 
+    z-index: 2; /* Fica acima do background (z-index: 1) */
+    filter: none;
 }
 
 .hero-inner{position:relative;z-index:1}
@@ -227,4 +256,32 @@ a{color:inherit;text-decoration:none}
     align-items: flex-start;
     gap: 8px;
   }
+}
+/* ===== HEADER DINÂMICO ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+/* Estado reduzido ao rolar */
+.header.shrink {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 4px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Transição suave da logo */
+.header .brand img {
+  height: 80px;
+  transition: height 0.3s ease;
+}
+
+.header.shrink .brand img {
+  height: 50px;
 }
