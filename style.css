@@ -44,11 +44,17 @@ a{color:inherit;text-decoration:none}
 /* Hero */
 /* Hero - Container principal */
 .hero {
-    position: relative; 
-    overflow: hidden;
-    background: none; 
-    border-bottom: 1px solid var(--border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* ocupa 100% da altura da tela */
+  padding-top: 120px; /* espaço extra pro header fixo */
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
+
 
 /* Camada de Background Desfocada (Pseudo-Elemento) */
 .hero::before {
@@ -73,10 +79,13 @@ a{color:inherit;text-decoration:none}
 
 /* Conteúdo do Hero (Para ficar nítido e acima) */
 .hero-inner {
-    position: relative; 
-    z-index: 2; /* Fica acima do background (z-index: 1) */
-    filter: none;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
+
 
 .hero-inner{position:relative;z-index:1}
 .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:56px 0}
@@ -263,20 +272,22 @@ a{color:inherit;text-decoration:none}
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.18); /* bem translúcido */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   transition: all 0.3s ease;
   z-index: 1000;
 }
 
-/* Estado reduzido ao rolar */
+/* Quando rolar a página */
 .header.shrink {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 4px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Transição suave da logo */
 .header .brand img {
   height: 80px;
   transition: height 0.3s ease;
@@ -285,3 +296,10 @@ a{color:inherit;text-decoration:none}
 .header.shrink .brand img {
   height: 50px;
 }
+
+.header a,
+.header h3 {
+  color: #222;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+}
+
